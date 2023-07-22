@@ -2,7 +2,7 @@
 function CheckoutScreen(props: any) {
   console.log(props)
   return (
-      <div>teste</div>
+      <div>Checkout</div>
   );
 }
 

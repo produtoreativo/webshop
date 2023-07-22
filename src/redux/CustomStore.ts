@@ -6,24 +6,33 @@ import {
     Reducer,
     Dispatch,
 } from 'redux';
-import { Saga, SagaMiddleware, Task } from 'redux-saga';
+import { createBrowserHistory } from 'history';
+import createSagaMiddleware, { Saga, SagaMiddleware, Task } from 'redux-saga';
+import { routerMiddleware } from 'connected-react-router';
 import { composeWithDevTools } from '@redux-devtools/extension';
-import { GlobalState, GlobalAction } from './Reducer';
+import createReducer, { GlobalState, GlobalAction } from './Reducer';
 
 interface StoreWithSagas {
     run<S extends Saga>(saga: S, ...args: Parameters<S>): Task
 }
+
+export const browserHistory = createBrowserHistory();
   
 export default class CustomStore implements Store<GlobalState, GlobalAction>, StoreWithSagas {
-    private store: Store<GlobalState, GlobalAction>;
+    // private store: Store<GlobalState, GlobalAction>;
+    private store: Store<any, any>;
     private sagaMiddleware: SagaMiddleware;
   
-    constructor(reducer: Reducer, sagaMiddleware: SagaMiddleware) {
-        this.sagaMiddleware = sagaMiddleware;
-        // this.sagaMiddleware.run();
+    constructor() {
+        this.sagaMiddleware = createSagaMiddleware();
+        const middlewares = [
+          routerMiddleware(browserHistory), 
+          this.sagaMiddleware
+        ];
+        const reducer = createReducer(browserHistory);
         this.store = legacy_createStore(
             reducer, 
-            composeWithDevTools(applyMiddleware(this.sagaMiddleware))
+            composeWithDevTools(applyMiddleware(...middlewares))
         );
     }
 
