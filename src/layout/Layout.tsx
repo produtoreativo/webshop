@@ -1,83 +1,101 @@
 import { styled, useTheme } from '@mui/material/styles';
-import { AppBar, Box, CssBaseline, Toolbar, Container, Drawer, Divider, List, ListItem, ListItemIcon, ListItemButton, ListItemText } from '@mui/material';
+import { AppBar, Box, CssBaseline, Toolbar, Container, Drawer, Divider, List, ListItem, ListItemIcon, ListItemButton, ListItemText, Typography } from '@mui/material';
 import { PropsWithChildren } from 'react';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import Suspense from '../components/Suspense';
-
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import HomeIcon from '@mui/icons-material/Home';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
 
 function Layout(props: PropsWithChildren) {
-    const theme = useTheme();
+    // const theme = useTheme();
     return (
-      <Container>
-          <Drawer
-            sx={{
-              width: 150,
-              flexShrink: 0,
-              '& .MuiDrawer-paper': {
-                width: 150,
-                boxSizing: 'border-box',
-              },
-            }}
-            variant="permanent"
-            anchor="left"
-          >
-            <Toolbar />
-            <Divider />
-            <List>
-              {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                <ListItem key={text} disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          </Drawer>
+      <Box sx={{ 
+        display: 'flex',
+      }}>
+        <Drawer
+          sx={{
+            width: 100,
+            backgroundColor: '#F0E9E9',
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: 100,
+              boxSizing: 'border-box',
+              backgroundColor: '#F0E9E9',
+            },
+          }}
+          variant="permanent"
+          anchor="left"
+        >
+          <List>
+              <ListItem key={"home"} >
+                <ListItemButton alignItems="center" sx={{
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}>
+                  <ListItemIcon sx={{
+                    minWidth: 35,
+                  }}>
+                    <HomeIcon fontSize="large" />
+                  </ListItemIcon>
+                  <ListItemText primary={"Home"} />
+                </ListItemButton>
+              </ListItem>       
 
-          <Box sx={{ 
-          display: 'flex',
-          flexDirection: 'column',
-        }}>
-          <CssBaseline />
-          {/* header */}
-          <AppBar
-            enableColorOnDark
-            position="static"
-            color="inherit"
-            elevation={0}
-            sx={{
-              // bgcolor: theme.palette.primary.main,
-              // color: '#fff',
-            }}
-          >
-            <Toolbar>
-              Header
-            </Toolbar>
-          </AppBar>
+              <ListItem key={"shop"} >
+                <ListItemButton sx={{
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}>
+                  <ListItemIcon sx={{
+                    minWidth: 35,
+                  }}>
+                    <ShoppingCartOutlinedIcon fontSize="large" />
+                  </ListItemIcon>
+                  <ListItemText primary={"Comprar"} />
+                </ListItemButton>
+              </ListItem>
 
-          {/* main content */}
-          {/* <Suspense>
-            <Box>
-              <div>
-                <div>Carregou</div>
-                {props.children}
-              </div>
-            </Box>
-          </Suspense> */}
-           <Box component="main">
-            <div>
-              <div>Carregou</div>
-              {props.children}
-            </div>
-          </Box>
+              <ListItem key={"orders"} >
+                <ListItemButton sx={{
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}>
+                  <ListItemIcon sx={{
+                    minWidth: 35,
+                  }}>
+                    <LocalMallIcon fontSize="large" />
+                  </ListItemIcon>
+                  <ListItemText primary={"Pedidos"} />
+                </ListItemButton>
+              </ListItem>
+              
 
+          </List>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
+          <Divider />
+          <List>   
+              <ListItem key={"exit"} >
+                <ListItemButton sx={{
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}>
+                  <ListItemIcon sx={{
+                    minWidth: 35,
+                  }}>
+                    <ExitToAppIcon fontSize="large" />
+                  </ListItemIcon>
+                  <ListItemText primary={"Sair"} />
+                </ListItemButton>
+              </ListItem>
+          </List>
+
+        </Drawer>
+
+        <Box component="main">
+            {props.children}
         </Box>
 
-      </Container>
+      </Box>
 
     )
 }

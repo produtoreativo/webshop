@@ -14,12 +14,6 @@ export interface GlobalAction extends Action {
     meta?: Meta
 }
 
-// export type Action extends AnyAction = {
-//     type: string;
-//     payload?: object;
-//     meta?: Meta
-// };
-
 function reducer(state = {
     count: 15
 }, action: GlobalAction): GlobalState {
