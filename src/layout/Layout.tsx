@@ -15,7 +15,7 @@ function Layout(props: PropsWithChildren) {
         <Drawer
           sx={{
             width: 100,
-            backgroundColor: '#F0E9E9',
+            //backgroundColor: '#F0E9E9',
             flexShrink: 0,
             '& .MuiDrawer-paper': {
               width: 100,
