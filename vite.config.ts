@@ -42,14 +42,14 @@ export default defineConfig({
   define: {
     global: "window",
   },
-  optimizeDeps: {
-    include: ["@react-navigation/native"],
-    esbuildOptions: {
-      mainFields: ["module", "main"],
-      resolveExtensions: [".web.js", ".js", ".ts"],
-      plugins: [esbuildCommonjs(["@react-navigation/elements"])],
-    },
-  },
+  // optimizeDeps: {
+  //   include: ["@react-navigation/native"],
+  //   esbuildOptions: {
+  //     mainFields: ["module", "main"],
+  //     resolveExtensions: [".web.js", ".js", ".ts"],
+  //     plugins: [esbuildCommonjs(["@react-navigation/elements"])],
+  //   },
+  // },
   resolve: {
     extensions: [".web.tsx", ".web.jsx", ".web.js", ".tsx", ".ts", ".js"],
     alias: {

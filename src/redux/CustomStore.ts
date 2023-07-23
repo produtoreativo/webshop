@@ -1,35 +1,26 @@
-import { 
-    applyMiddleware, 
-    legacy_createStore,
-    Store, 
-    Observable, 
-    Reducer,
-    Dispatch,
-} from 'redux';
-import { createBrowserHistory } from 'history';
+import { applyMiddleware, Store, Observable, Reducer, Dispatch, legacy_createStore } from 'redux';
+
 import createSagaMiddleware, { Saga, SagaMiddleware, Task } from 'redux-saga';
-import { routerMiddleware } from 'connected-react-router';
 import { composeWithDevTools } from '@redux-devtools/extension';
 import createReducer, { GlobalState, GlobalAction } from './Reducer';
+import { Router } from '@remix-run/router';
 
 interface StoreWithSagas {
     run<S extends Saga>(saga: S, ...args: Parameters<S>): Task
 }
 
-export const browserHistory = createBrowserHistory();
-  
 export default class CustomStore implements Store<GlobalState, GlobalAction>, StoreWithSagas {
-    // private store: Store<GlobalState, GlobalAction>;
-    private store: Store<any, any>;
+    private store: Store<GlobalState, GlobalAction>;
     private sagaMiddleware: SagaMiddleware;
   
-    constructor() {
+    constructor(router: Router) {
         this.sagaMiddleware = createSagaMiddleware();
+        this.sagaMiddleware.setContext({ router });
         const middlewares = [
-          routerMiddleware(browserHistory), 
           this.sagaMiddleware
         ];
-        const reducer = createReducer(browserHistory);
+        const reducer = createReducer();
+
         this.store = legacy_createStore(
             reducer, 
             composeWithDevTools(applyMiddleware(...middlewares))
@@ -57,5 +48,4 @@ export default class CustomStore implements Store<GlobalState, GlobalAction>, St
     replaceReducer = (nextReducer: Reducer<GlobalState, GlobalAction>)  => {
       this.store.replaceReducer(nextReducer);
     }
-
-  }
+}
