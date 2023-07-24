@@ -1,29 +1,36 @@
-import { takeLatest, put, select, call, } from 'redux-saga/effects';
+import { takeLatest, put, select, call, fork, spawn } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 import { GlobalStateWithInput, TYPE_SEARCH } from '../reducers/typeSearch';
+import axios from 'axios';
+
+type Product = {
+    id: string,
+    name: string
+}
 
 type ProductList = {
-    list: []
+    list: Product[]
 }
 
 async function fetchData(): Promise<ProductList> {
-    return new Promise((resolve) => {
-        return resolve({ list: []});
-    })
+    console.log(`Delayed execution for 1000 milliseconds`);
+    const response = await axios.get('http://localhost:3000/search/products-list');
+    console.log('Dados', response.data);
+    return response.data as ProductList;
+
 }
 
 export function selector(state: GlobalStateWithInput): string | undefined {
     return state.searchInputValue;
 }
 
-export function * fetchDataSaga(fetchDataFn ): SagaIterator  {
+export function* fetchDataSaga(fetchDataFn: () => Promise<ProductList>): SagaIterator {
     try {
-        const searchInputValue: string | undefined = yield select(selector);
-        if (searchInputValue.length >= 4) {
-            console.log('****** saga', searchInputValue)
-            debugger
-            const products: ProductList = yield call(fetchDataFn);
-            debugger
+        const searchInputValue = (yield select(selector)) as string | undefined;
+        const inputValue = searchInputValue || ''; // Default to empty string if undefined
+        if (inputValue.length >= 4) {
+            console.log('****** saga', inputValue)
+            const products: ProductList = (yield call(fetchDataFn)) as ProductList;
             console.log('****** products', products)
             yield put({ type: 'DATA_RECEIVED', payload: { data: 'Dados recebidos', products } });
         }        
@@ -32,6 +39,12 @@ export function * fetchDataSaga(fetchDataFn ): SagaIterator  {
     }
 }
 
-export  function* rootSaga(): SagaIterator {
+
+
+export function* productsSaga(): SagaIterator {
     yield takeLatest(TYPE_SEARCH, fetchDataSaga, fetchData);
+}
+
+export function* rootSaga(): SagaIterator {
+    yield spawn(productsSaga)
 }
