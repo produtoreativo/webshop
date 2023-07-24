@@ -1,24 +1,24 @@
-import { Box, Drawer, Divider, List, ListItem, ListItemIcon, ListItemButton, ListItemText, Typography } from '@mui/material';
+import { Link, Box, Drawer, Divider, List, ListItem, ListItemIcon, ListItemButton, ListItemText, Typography } from '@mui/material';
 import { PropsWithChildren } from 'react';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import HomeIcon from '@mui/icons-material/Home';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Link as RouterLink, Outlet, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 function Layout(props: PropsWithChildren) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const location = useLocation();
-  // console.log('hash', location.hash);
-  // console.log('pathname', location.pathname);
-  // console.log('search', location.search);
-  // console.log(location);
-  // dispatch({
-  //   type: '@@route_navigation',
-  //   payload: location,
-  // })
+  const location = useLocation();
+  console.log('hash', location.hash);
+  console.log('pathname', location.pathname);
+  console.log('search', location.search);
+  console.log(location);
+  dispatch({
+    type: '@@route_navigation',
+    payload: location,
+  })
 
   return (
     <Box sx={{ 
@@ -40,7 +40,8 @@ function Layout(props: PropsWithChildren) {
       >
         <List>
             <ListItem key={"home"} >
-              <ListItemButton alignItems="center" sx={{
+              <ListItemButton 
+              sx={{
                 display: 'flex',
                 flexDirection: 'column'
               }}>
@@ -54,7 +55,10 @@ function Layout(props: PropsWithChildren) {
             </ListItem>       
 
             <ListItem key={"shop"} >
-              <ListItemButton sx={{
+              <ListItemButton 
+              component="a"
+              href='/checkout'
+              sx={{
                 display: 'flex',
                 flexDirection: 'column'
               }}>
@@ -103,7 +107,9 @@ function Layout(props: PropsWithChildren) {
 
       </Drawer>
 
-      <Box component="main">
+      <Box component="main" sx={{
+        flexGrow: 1
+      }}>
           {props.children}
           <Outlet />
       </Box>
