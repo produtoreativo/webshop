@@ -9,14 +9,14 @@ type Product = {
 }
 
 type ProductList = {
-    list: Product[]
+    data: Product[]
 }
 
 async function fetchData(): Promise<ProductList> {
     console.log(`Delayed execution for 1000 milliseconds`);
     const response = await axios.get('http://localhost:3000/search/products-list');
-    console.log('Dados', response.data);
-    return response.data as ProductList;
+    console.log('Dados', response);
+    return response as ProductList;
 
 }
 
@@ -29,7 +29,6 @@ export function* fetchDataSaga(fetchDataFn: () => Promise<ProductList>): SagaIte
         const searchInputValue = (yield select(selector)) as string | undefined;
         const inputValue = searchInputValue || ''; // Default to empty string if undefined
         if (inputValue.length >= 4) {
-            console.log('****** saga', inputValue)
             const products: ProductList = (yield call(fetchDataFn)) as ProductList;
             console.log('****** products', products)
             yield put({ type: 'DATA_RECEIVED', payload: { data: 'Dados recebidos', products } });
@@ -39,12 +38,10 @@ export function* fetchDataSaga(fetchDataFn: () => Promise<ProductList>): SagaIte
     }
 }
 
-
-
 export function* productsSaga(): SagaIterator {
     yield takeLatest(TYPE_SEARCH, fetchDataSaga, fetchData);
 }
 
 export function* rootSaga(): SagaIterator {
-    yield spawn(productsSaga)
+    yield fork(productsSaga)
 }

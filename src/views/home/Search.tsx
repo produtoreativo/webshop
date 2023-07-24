@@ -20,7 +20,7 @@ export default function PrimarySearchAppBar() {
           task.cancel();
         }
       }
-    });
+    }, [store]);
     const searchInputValue: string = useSelector(selector) || '';
     const onChangeText = (payload: string) => dispatch({ 
       type: TYPE_SEARCH,
