@@ -40,7 +40,7 @@ function Layout(props: PropsWithChildren) {
       >
         <List>
             <ListItem key={"home"} >
-              <ListItemButton 
+              <ListItemButton component={RouterLink} to="/"
               sx={{
                 display: 'flex',
                 flexDirection: 'column'
@@ -55,9 +55,7 @@ function Layout(props: PropsWithChildren) {
             </ListItem>       
 
             <ListItem key={"shop"} >
-              <ListItemButton 
-              component="a"
-              href='/checkout'
+              <ListItemButton component={RouterLink} to="/checkout"
               sx={{
                 display: 'flex',
                 flexDirection: 'column'

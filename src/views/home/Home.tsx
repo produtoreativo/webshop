@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import Search from "./Search";
+import Products from "./Products";
 
 function HomeScreen(props: any) {
     // const navigate = useNavigate();
@@ -8,11 +9,7 @@ function HomeScreen(props: any) {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Search />
-            <div>
-                <div>Home</div>
-                <Link to="/checkout">Checkout</Link>
-            </div>
-
+            <Products />
         </Box>
     );
 }

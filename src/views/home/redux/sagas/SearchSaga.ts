@@ -2,14 +2,12 @@ import { takeLatest, put, select, call, fork, spawn } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 import { GlobalStateWithInput, TYPE_SEARCH } from '../reducers/typeSearch';
 import axios from 'axios';
+import { ProductList } from '../models/ProductModel';
+import productsReducer from '../reducers/productsReducer';
+import { FETCH_SUCCESS_PRODUCTS } from '../actions/productsAction';
 
-type Product = {
-    id: string,
-    name: string
-}
-
-type ProductList = {
-    data: Product[]
+export function selector(state: GlobalStateWithInput): string | undefined {
+    return state.searchInputValue;
 }
 
 async function fetchData(): Promise<ProductList> {
@@ -17,11 +15,6 @@ async function fetchData(): Promise<ProductList> {
     const response = await axios.get('http://localhost:3000/search/products-list');
     console.log('Dados', response);
     return response as ProductList;
-
-}
-
-export function selector(state: GlobalStateWithInput): string | undefined {
-    return state.searchInputValue;
 }
 
 export function* fetchDataSaga(fetchDataFn: () => Promise<ProductList>): SagaIterator {
@@ -31,7 +24,15 @@ export function* fetchDataSaga(fetchDataFn: () => Promise<ProductList>): SagaIte
         if (inputValue.length >= 4) {
             const products: ProductList = (yield call(fetchDataFn)) as ProductList;
             console.log('****** products', products)
-            yield put({ type: 'DATA_RECEIVED', payload: { data: 'Dados recebidos', products } });
+            yield put({ 
+                type: FETCH_SUCCESS_PRODUCTS, 
+                payload: {
+                    data: products.data,
+                },
+                meta: {
+                    reducer: productsReducer
+                }
+            });
         }        
     } catch (error) {
         console.log('****** error', error)
@@ -43,5 +44,5 @@ export function* productsSaga(): SagaIterator {
 }
 
 export function* rootSaga(): SagaIterator {
-    yield fork(productsSaga)
+    yield spawn(productsSaga)
 }
