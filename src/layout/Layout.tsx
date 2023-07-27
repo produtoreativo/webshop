@@ -1,4 +1,4 @@
-import { Link, Box, Drawer, Divider, List, ListItem, ListItemIcon, ListItemButton, ListItemText, Typography } from '@mui/material';
+import { Box, Drawer, Divider, List, ListItem, ListItemIcon, ListItemButton, ListItemText, Typography, Badge } from '@mui/material';
 import { PropsWithChildren } from 'react';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import HomeIcon from '@mui/icons-material/Home';
@@ -25,6 +25,7 @@ function Layout(props: PropsWithChildren) {
       display: 'flex',
     }}>
       <Drawer
+        color='secondary'
         sx={{
           width: 100,
           //backgroundColor: '#F0E9E9',
@@ -32,7 +33,7 @@ function Layout(props: PropsWithChildren) {
           '& .MuiDrawer-paper': {
             width: 100,
             boxSizing: 'border-box',
-            backgroundColor: '#F0E9E9',
+            // backgroundColor: '#F0E9E9',
           },
         }}
         variant="permanent"
@@ -63,7 +64,10 @@ function Layout(props: PropsWithChildren) {
                 <ListItemIcon sx={{
                   minWidth: 35,
                 }}>
-                  <ShoppingCartOutlinedIcon fontSize="large" />
+                  <Badge badgeContent={4} color="primary">
+                    <ShoppingCartOutlinedIcon fontSize="large" />
+                  </Badge>
+                  
                 </ListItemIcon>
                 <ListItemText primary={"Comprar"} />
               </ListItemButton>

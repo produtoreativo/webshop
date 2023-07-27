@@ -1,16 +1,16 @@
-import { useTheme } from '@mui/material/styles';
-
 import cocaLogo from '../../assets/78912939_01.png';
+import { 
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Button,
+  TextField, 
+  Typography,  
+} from '@mui/material';
+import { Add, RemoveOutlined } from '@mui/icons-material';
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
 import { Product } from './redux/models/ProductModel';
 
 type PropsWithProduct = {
@@ -18,29 +18,55 @@ type PropsWithProduct = {
 }
 
 export default function ProductView(props: PropsWithProduct) {
-  const theme = useTheme();
+  // const theme = useTheme();
+  const { name, qty, price } = props.product;
+  const quantity = qty || 1;
+  const buttonText = quantity > 1 ? `${quantity} itens`: `${quantity} item`;
 
   return (
     <Card sx={{ display: 'flex' }}>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
-            {props.product.name}
+            {name}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
-            R$ 13,50
+            R$ {price}
           </Typography>
         </CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+        <Box sx={{ flex: 1 , display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
           <IconButton aria-label="previous">
-            {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
+           <RemoveOutlined />
           </IconButton>
-          <IconButton aria-label="play/pause">
-            <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-          </IconButton>
+          <TextField 
+            value={qty}
+            hiddenLabel
+            focused
+            variant="outlined"
+            sx={{
+              width: 60,
+              '& .MuiInput-underline:after': {
+                  borderBottomColor: '#E4E4E5',
+              },
+              '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                  borderColor: '#E4E4E5',
+                  },
+                  '&:hover fieldset': {
+                  borderColor: '#E4E4E5',
+                  },
+                  '&.Mui-focused fieldset': {
+                  borderColor: '#E4E4E5',
+                  },
+              },
+          }}
+          />
           <IconButton aria-label="next">
-            {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
+            <Add />
           </IconButton>
+        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+          <Button fullWidth variant="contained">Adicionar {buttonText}</Button>
         </Box>
       </Box>
       <CardMedia

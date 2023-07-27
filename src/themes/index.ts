@@ -2,17 +2,19 @@ import { createTheme } from '@mui/material/styles';
 import { colors } from '@mui/material';
 
 export const theme = () => {
-  const red = colors['red'];
+  // const red = colors['red'];
+  const color = colors['yellow'];
   const themes = createTheme({
     palette: {
+      // mode: 'dark',
       primary: {
-        main: red[500],
+        main: color[500],
       },
       secondary: {
-        main: red[100],
+        main: color[100],
       },
       error: {
-        main: red.A400,
+        main: color.A400,
       },
     },
   });

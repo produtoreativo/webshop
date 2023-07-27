@@ -10,7 +10,7 @@ export default function ResponsiveGrid() {
   const products: ProductList = useSelector(productsSelector);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, margin: 2 }}>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {products.data.map((product: ProductModel, index) => (
           <Grid xs={2} sm={4} md={4} key={index}>
