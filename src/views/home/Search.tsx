@@ -7,68 +7,62 @@ import { useDispatch, useSelector, useStore } from 'react-redux';
 import CustomStore from '../../redux/CustomStore';
 import { useEffect } from 'react';
 import { rootSaga, selector } from './redux/sagas/SearchSaga';
-import typeSearch, { TYPE_SEARCH } from './redux/reducers/typeSearch';
+import { productActions } from './redux/actions/productsAction';
 
 export default function PrimarySearchAppBar() {
-    const dispatch = useDispatch();
-    const store = useStore() as CustomStore;
-  
-    useEffect(function registerSaga() {
-      const task = store.run(rootSaga);
-      return () => {
-        if (task) {
-          task.cancel();
-        }
+  const dispatch = useDispatch();
+  const store = useStore() as CustomStore;
+  useEffect(function registerSaga() {
+    const task = store.run(rootSaga);
+    return () => {
+      if (task) {
+        task.cancel();
       }
-    }, [store]);
-    const searchInputValue: string = useSelector(selector) || '';
-    const onChangeText = (payload: string) => dispatch({ 
-      type: TYPE_SEARCH,
-      payload,
-      meta: {
-        reducer: typeSearch,
-      }
-    });
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        onChangeText(event.target.value);
     }
+  }, [store]);
+  const searchInputValue: string = useSelector(selector) || '';
+  const actions = productActions(dispatch);
+  const onChangeText = actions.onChangeTypeSearch;
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChangeText(event.target.value);
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar color='transparent' position="static">
         <Toolbar>
-            <TextField
-                value={searchInputValue}
-                onChange={onChange}
-                placeholder="Busca..." 
-                fullWidth
-                hiddenLabel
-                focused 
-                sx={{
-                    '& .MuiInput-underline:after': {
-                        borderBottomColor: '#E4E4E5',
-                    },
-                    '& .MuiOutlinedInput-root': {
-                        '& fieldset': {
-                        borderColor: '#E4E4E5',
-                        },
-                        '&:hover fieldset': {
-                        borderColor: '#E4E4E5',
-                        },
-                        '&.Mui-focused fieldset': {
-                        borderColor: '#E4E4E5',
-                        },
-                    },
-                }}
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                        <SearchIcon />
-                        </InputAdornment>
-                    ),
-                }}
-                variant="outlined"
-            />
-            <Box sx={{ flexGrow: 1 }} />
+          <TextField
+            value={searchInputValue}
+            onChange={onChange}
+            placeholder="Busca..."
+            fullWidth
+            hiddenLabel
+            focused
+            sx={{
+              '& .MuiInput-underline:after': {
+                borderBottomColor: '#E4E4E5',
+              },
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#E4E4E5',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#E4E4E5',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#E4E4E5',
+                },
+              },
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            variant="outlined"
+          />
+          <Box sx={{ flexGrow: 1 }} />
         </Toolbar>
       </AppBar>
     </Box>

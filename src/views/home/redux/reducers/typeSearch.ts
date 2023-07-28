@@ -1,4 +1,4 @@
-import { GlobalAction } from "../../../../redux/Reducer";
+import { GlobalAction } from "../../../../redux/actions";
 
 export type GlobalStateWithInput = {
     searchInputValue?: string;

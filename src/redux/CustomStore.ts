@@ -2,8 +2,10 @@ import { applyMiddleware, Store, Observable, Reducer, Dispatch, legacy_createSto
 
 import createSagaMiddleware, { Saga, SagaMiddleware, Task } from 'redux-saga';
 import { composeWithDevTools } from '@redux-devtools/extension';
-import createReducer, { GlobalState, GlobalAction } from './Reducer';
+import createReducer from './Reducer';
 import { Router } from '@remix-run/router';
+import { GlobalAction } from './actions';
+import { GlobalState } from './state';
 
 interface StoreWithSagas {
     run<S extends Saga>(saga: S, ...args: Parameters<S>): Task

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
-function CheckoutScreen(props: any) {
-  console.log(props)
+function CheckoutScreen() {
   return (
     <div>
       <div>Checkout</div>
