@@ -10,16 +10,14 @@ interface ActionForNewrelic extends GlobalAction {
 
 export function* fetchDataSaga(action: GlobalAction): SagaIterator {
     try {
-        const newrelic: BrowserAgent =( yield getContext('newRelicAgent')) as BrowserAgent;
-        console.log('NewRelicSaga', action);
+        const newrelic: BrowserAgent = (yield getContext('newRelicAgent')) as BrowserAgent;
+
         if(action.type === '@@route_navigation') {
             const actionForNewrelic = action as ActionForNewrelic;
-            console.log('NEWRELIC: action.payload.pathname', actionForNewrelic.payload.pathname);
             newrelic.setPageViewName(actionForNewrelic.payload.pathname)
         } if (action.type === FAILURE) {
             newrelic.noticeError(action.payload as Error);
         } else {
-            console.log('NEWRELIC: action.payload', action.payload);
             newrelic.addPageAction(action.type, action.payload)
         }
 

@@ -8,6 +8,7 @@ import { GlobalAction } from './actions';
 import { GlobalState } from './state';
 import NewRelicAgent from './newrelic';
 import { rootSaga } from './sagas/newrelic';
+import axios from './server';
 
 interface StoreWithSagas {
     run<S extends Saga>(saga: S, ...args: Parameters<S>): Task
@@ -21,6 +22,7 @@ export default class CustomStore implements Store<GlobalState, GlobalAction>, St
         this.sagaMiddleware = createSagaMiddleware({
           context: {
             newRelicAgent: NewRelicAgent(),
+            axios,
           }
         });
         this.sagaMiddleware.setContext({ router });
