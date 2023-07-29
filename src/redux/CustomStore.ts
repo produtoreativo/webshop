@@ -6,6 +6,8 @@ import createReducer from './Reducer';
 import { Router } from '@remix-run/router';
 import { GlobalAction } from './actions';
 import { GlobalState } from './state';
+import NewRelicAgent from './newrelic';
+import { rootSaga } from './sagas/newrelic';
 
 interface StoreWithSagas {
     run<S extends Saga>(saga: S, ...args: Parameters<S>): Task
@@ -16,17 +18,25 @@ export default class CustomStore implements Store<GlobalState, GlobalAction>, St
     private sagaMiddleware: SagaMiddleware;
   
     constructor(router: Router) {
-        this.sagaMiddleware = createSagaMiddleware();
+        this.sagaMiddleware = createSagaMiddleware({
+          context: {
+            newRelicAgent: NewRelicAgent(),
+          }
+        });
         this.sagaMiddleware.setContext({ router });
         const middlewares = [
           this.sagaMiddleware
         ];
         const reducer = createReducer();
-
         this.store = legacy_createStore(
             reducer, 
             composeWithDevTools(applyMiddleware(...middlewares))
         );
+
+        if (import.meta.env.VITE_ENABLE_NEWRELIC == 1) {
+          this.sagaMiddleware.run(rootSaga);
+        }
+        
     }
 
     run<S extends Saga>(saga: S, ...args: Parameters<S>): Task {
