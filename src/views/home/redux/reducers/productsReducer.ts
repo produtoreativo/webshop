@@ -14,7 +14,7 @@ function reducer(state: globalStateWithProducts, action: ProductAction) {
     if (action.type === FETCH_SUCCESS_PRODUCTS) {
 
         const productService = new ProductService(action.payload.data);
-        const data: Product[] = productService.updateDataFromCart();
+        const data: Product[] = productService.updateDataFromCart(state.cart);
 
         return {
             ...state,

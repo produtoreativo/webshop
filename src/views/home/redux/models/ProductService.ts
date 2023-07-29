@@ -9,10 +9,11 @@ export default class ProductService {
         this.products.data = data;
     }
 
-    updateDataFromCart = () => {
+    updateDataFromCart = (cart: ShopCart.Cart) => {
         const data: Product[] = this.products.data.map((product: Product) => {
             product.qty = 1;
             product.price = product.price_0_1 as unknown as string;
+            product.addedToCart = !!cart.products.data.filter(p => p.id == product.id)[0];
             return product;
         })
 

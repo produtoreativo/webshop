@@ -12,14 +12,20 @@ export default function SideMenu() {
     const dispatch = useDispatch();
     const darkMode: PaletteMode = useSelector(darkModeSelector) || 'dark' as PaletteMode;
     const darkModeValue = (darkMode === 'dark');
-    
-console.log('SideMenu', darkMode, darkModeValue)
-
 
     const handleToggle = () => dispatch({
         type: THEME_SWITCH,
         payload: darkMode
-    })
+    });
+
+    const count: number = useSelector(status => status.cart.count);
+    const quantity = count;
+
+    const buttonWithBadge = (quantity > 0) ?
+    (<Badge badgeContent={quantity} color="primary">
+        <ShoppingCartOutlinedIcon fontSize="large" />
+    </Badge>) : 
+    <ShoppingCartOutlinedIcon fontSize="large" />
 
     return (
         <Drawer
@@ -62,9 +68,7 @@ console.log('SideMenu', darkMode, darkModeValue)
                         <ListItemIcon sx={{
                             minWidth: 35,
                         }}>
-                            <Badge badgeContent={4} color="primary">
-                                <ShoppingCartOutlinedIcon fontSize="large" />
-                            </Badge>
+                           {buttonWithBadge}
 
                         </ListItemIcon>
                         <ListItemText primary={"Comprar"} />

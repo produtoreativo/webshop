@@ -4,6 +4,7 @@ export type Product = {
     price: string,
     qty?: number,
     price_0_1: number,
+    addedToCart: boolean,
 }
 
 export type ProductList = {

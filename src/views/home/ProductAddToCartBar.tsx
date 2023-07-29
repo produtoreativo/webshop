@@ -1,15 +1,29 @@
 import { Add, RemoveOutlined } from "@mui/icons-material";
 import { Box, Button, IconButton, TextField } from "@mui/material";
 import { Product } from './redux/models/ProductModel';
+import { useDispatch } from "react-redux";
+import { productActions } from "./redux/actions/productsAction";
 
 type PropsWithProduct = {
     product: Product
 }
 
 export default function ProductAddToCartBar(props: PropsWithProduct) {
-    const { qty } = props.product;
+    const dispatch = useDispatch();
+    const actions = productActions(dispatch);
+
+    const { qty, addedToCart } = props.product;
+    const labelText = addedToCart? 'Remover': 'Adicionar';
     const quantity = qty || 1;
-    const buttonText = quantity > 1 ? `${quantity} itens`: `${quantity} item`;
+    const buttonText = quantity > 1 ? `${labelText} ${quantity} itens`: `${labelText} ${quantity} item`;
+
+    const onClick = () => {
+        if (addedToCart) {
+            actions.removeFromCart(props.product);
+        } else {
+            actions.addToCart(props.product)
+        }
+    };
     return (
         <div>
             <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
@@ -39,12 +53,19 @@ export default function ProductAddToCartBar(props: PropsWithProduct) {
                         },
                     }}
                 />
-                <IconButton aria-label="next">
+                <IconButton 
+                    aria-label="addMore">
                     <Add />
                 </IconButton>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-                <Button fullWidth variant="contained">Adicionar {buttonText}</Button>
+                <Button 
+                    fullWidth
+                    color={ addedToCart? "secondary": "primary"}
+                    onClick={onClick}  
+                    variant="contained">
+                        {buttonText}
+                </Button>
             </Box>
         </div>
     )

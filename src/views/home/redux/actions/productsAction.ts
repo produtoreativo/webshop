@@ -1,9 +1,12 @@
 import { bindActionCreators, Dispatch } from 'redux';
-import { ProductList } from "../models/ProductModel";
+import { Product, ProductList } from "../models/ProductModel";
 import typeSearch, { TYPE_SEARCH } from '../reducers/typeSearch';
 import { GlobalState } from '../../../../redux/state';
+import cartReducer from '../reducers/cartReducer';
 
 export const FETCH_SUCCESS_PRODUCTS = '@@FETCH_SUCCESS_PRODUCTS';
+export const ADD_TO_CART = '@@ADD_TO_CART';
+export const REMOVE_FROM_CART = '@@REMOVE_FROM_CART';
 
 export interface globalStateWithProducts extends GlobalState {
     products: ProductList,
@@ -21,6 +24,25 @@ export const onChangeTypeSearch = (payload: string) => ({
     },
 });
 
+
+export const addToCart = (payload: Product) => ({
+    type: ADD_TO_CART,
+    payload,
+    meta: {
+        reducer: cartReducer,
+    },
+});
+
+export const removeFromCart = (payload: Product) => ({
+    type: REMOVE_FROM_CART,
+    payload,
+    meta: {
+        reducer: cartReducer,
+    },
+});
+
 export const productActions = (dispatch: Dispatch) => bindActionCreators({
     onChangeTypeSearch,
+    addToCart,
+    removeFromCart,
 }, dispatch);
