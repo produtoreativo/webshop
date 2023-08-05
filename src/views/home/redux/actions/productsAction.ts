@@ -7,6 +7,8 @@ import cartReducer from '../reducers/cartReducer';
 export const FETCH_SUCCESS_PRODUCTS = '@@FETCH_SUCCESS_PRODUCTS';
 export const ADD_TO_CART = '@@ADD_TO_CART';
 export const REMOVE_FROM_CART = '@@REMOVE_FROM_CART';
+export const CREATE_ORDER = '@@CREATE_ORDER';
+export const CREATE_ORDER_SUCCESS = '@@CREATE_ORDER_SUCCESS';
 
 export interface globalStateWithProducts extends GlobalState {
     products: ProductList,
@@ -41,8 +43,14 @@ export const removeFromCart = (payload: Product) => ({
     },
 });
 
+export const createOrder = (payload: Product) => ({
+    type: CREATE_ORDER,
+    payload,
+});
+
 export const productActions = (dispatch: Dispatch) => bindActionCreators({
     onChangeTypeSearch,
     addToCart,
     removeFromCart,
+    createOrder,
 }, dispatch);

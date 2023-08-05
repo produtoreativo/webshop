@@ -6,8 +6,9 @@ import { InputAdornment, TextField } from '@mui/material';
 import { useDispatch, useSelector, useStore } from 'react-redux';
 import CustomStore from '../../redux/CustomStore';
 import { useEffect } from 'react';
-import { rootSaga, selector } from './redux/sagas/SearchSaga';
 import { productActions } from './redux/actions/productsAction';
+import { rootSaga } from './redux/sagas/rootSaga';
+import { selector } from './redux/sagas/searchSaga';
 
 export default function PrimarySearchAppBar() {
   const dispatch = useDispatch();

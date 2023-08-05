@@ -40,7 +40,3 @@ export function* fetchDataSaga(fetchDataFn: (query: string, axios: Axios) => Pro
 export function* productsSaga(): SagaIterator {
     yield takeLatest(TYPE_SEARCH, fetchDataSaga, fetchData);
 }
-
-export function* rootSaga(): SagaIterator {
-    yield spawn(productsSaga)
-}
