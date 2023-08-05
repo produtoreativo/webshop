@@ -59,24 +59,8 @@ export default function SideMenu() {
                     </ListItemButton>
                 </ListItem>
 
-                <ListItem key={"shop"} >
-                    <ListItemButton component={RouterLink} to="/checkout"
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column'
-                        }}>
-                        <ListItemIcon sx={{
-                            minWidth: 35,
-                        }}>
-                           {buttonWithBadge}
-
-                        </ListItemIcon>
-                        <ListItemText primary={"Comprar"} />
-                    </ListItemButton>
-                </ListItem>
-
                 <ListItem key={"orders"} >
-                    <ListItemButton sx={{
+                    <ListItemButton component={RouterLink} to="/checkout" sx={{
                         display: 'flex',
                         flexDirection: 'column'
                     }}>

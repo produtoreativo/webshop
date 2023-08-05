@@ -11,7 +11,7 @@ export function selector(state: GlobalStateWithInput): string | undefined {
 }
 
 async function fetchData(query: string, axios: Axios): Promise<ProductList> {
-    const response = await axios.get(`/search?query=${query}`);
+    const response = await axios.get(`/products?query=${query}`);
     return response as ProductList;
 }
 
