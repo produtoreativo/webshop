@@ -1,4 +1,4 @@
-import { takeLatest, put, select, call, spawn, getContext } from 'redux-saga/effects';
+import { takeLatest, put, select, call, getContext } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 import { GlobalStateWithInput, TYPE_SEARCH } from '../reducers/typeSearch';
 import { ProductList } from '../models/ProductModel';

@@ -21,8 +21,8 @@ export default class CustomStore implements Store<GlobalState, GlobalAction>, St
     constructor(router: Router) {
         this.sagaMiddleware = createSagaMiddleware({
           context: {
-            newRelicAgent: NewRelicAgent(),
             axios,
+            newRelicAgent: NewRelicAgent(),
           }
         });
         this.sagaMiddleware.setContext({ router });

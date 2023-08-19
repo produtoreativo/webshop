@@ -2,8 +2,6 @@
 import { GlobalAction } from "../../../../redux/actions";
 import { ADD_TO_CART, REMOVE_FROM_CART, globalStateWithProducts } from "../actions/productsAction";
 import { Product } from "../models/ProductModel";
-import ProductService from "../models/ProductService";
-
 
 interface ProductAction extends GlobalAction {
     payload: Product

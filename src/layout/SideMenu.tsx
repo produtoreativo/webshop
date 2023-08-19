@@ -1,9 +1,8 @@
-import { Badge, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, PaletteMode, Switch, Typography } from "@mui/material";
+import { Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, PaletteMode, Switch, Typography } from "@mui/material";
 import { Link as RouterLink } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { DarkMode } from '@mui/icons-material';
 import { useDispatch, useSelector } from "react-redux";
 import { THEME_SWITCH, darkModeSelector } from "../redux/actions";
@@ -17,15 +16,6 @@ export default function SideMenu() {
         type: THEME_SWITCH,
         payload: darkMode
     });
-
-    const count: number = useSelector(status => status.cart.count);
-    const quantity = count;
-
-    const buttonWithBadge = (quantity > 0) ?
-    (<Badge badgeContent={quantity} color="primary">
-        <ShoppingCartOutlinedIcon fontSize="large" />
-    </Badge>) : 
-    <ShoppingCartOutlinedIcon fontSize="large" />
 
     return (
         <Drawer
