@@ -15,7 +15,7 @@ export const initialGlobalState: GlobalState = {
       }
     },
     auth: {
-      "accessToken": "eyJraWQiOiIxIiwiYWxnIjoiSFMyNTYifQ.eyJ1aWQiOjMsInV0eXBpZCI6MywiaWF0IjoxNjkyNDU5MjQ3LCJleHAiOjE2OTI0NjI4NDd9.lAUKNwpVkyW0PKEMs1Ud_G6z2gZzZNHxtnJboXZA-GM",
+      "accessToken": "eyJraWQiOiIxIiwiYWxnIjoiSFMyNTYifQ.eyJ1aWQiOjMsInV0eXBpZCI6MywiaWF0IjoxNjkyNzE0ODI1LCJleHAiOjE2OTI3MTg0MjV9.YtRbvKrdMoqIiG3nTs7dJoK537526B60xdzAVu7Cmpo",
       "createdAt": 1692454268106,
       "expireIn": "1h"
     },
