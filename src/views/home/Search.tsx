@@ -8,7 +8,7 @@ import CustomStore from '../../redux/CustomStore';
 import { useEffect } from 'react';
 import { productActions } from './redux/actions/productsAction';
 import { rootSaga } from './redux/sagas/rootSaga';
-import { selector } from './redux/sagas/searchSaga';
+import { selector } from './redux/sagas/searchProductsSaga';
 
 export default function PrimarySearchAppBar() {
   const dispatch = useDispatch();
