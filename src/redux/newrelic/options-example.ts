@@ -12,12 +12,13 @@ const options = {
         sa: 1,
     },
     loader_config: {
-        accountID: "1234567",
-        trustKey: "1234567",
-        agentID: "1234567890",
-        licenseKey: "NRJS-1234567890",
-        applicationID: "1234567890",
+        accountID:"3686419",
+        trustKey:"3686419",
+        agentID:"1134593260",
+        licenseKey:"NRJS-57562e87344ae17b0e2",
+        applicationID:"1134593260"
     }
 };
 
 export default options;
+

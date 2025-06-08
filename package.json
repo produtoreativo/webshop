@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start:watch:newrelic": "npm run dev",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -16,7 +17,7 @@
     "@fullstory/browser": "^1.7.1",
     "@mui/icons-material": "^5.14.1",
     "@mui/material": "^5.14.1",
-    "@newrelic/browser-agent": "^1.237.0",
+    "@newrelic/browser-agent": "1.261.0",
     "@redux-devtools/extension": "^3.2.5",
     "axios": "^1.4.0",
     "react": "^18.2.0",
