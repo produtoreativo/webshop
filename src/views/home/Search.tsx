@@ -32,6 +32,9 @@ export default function PrimarySearchAppBar() {
       <AppBar color='transparent' position="static">
         <Toolbar>
           <TextField
+            name='search'
+            id='search'
+            data-testid="search-input"
             value={searchInputValue}
             onChange={onChange}
             placeholder="Busca..."
