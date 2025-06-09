@@ -5,7 +5,6 @@ import { ProductList } from '../models/ProductModel';
 import productsReducer from '../reducers/productsReducer';
 import { FETCH_SUCCESS_PRODUCTS } from '../actions/productsAction';
 import { Axios } from 'axios';
-import { BrowserAgent } from '@newrelic/browser-agent';
 import { FAILURE } from '../../../../redux/actions';
 
 export function selector(state: GlobalStateWithInput): string | undefined {
@@ -18,7 +17,6 @@ async function fetchData(query: string, axios: Axios): Promise<ProductList> {
 }
 
 export function* fetchDataSaga(fetchDataFn: (query: string, axios: Axios) => Promise<ProductList>): SagaIterator {
-    // const newrelic: BrowserAgent = (yield getContext('newRelicAgent')) as BrowserAgent;
     const axios: Axios = (yield getContext('axios')) as Axios;
     const searchInputValue = (yield select(selector)) as string | undefined;
     try {
@@ -37,8 +35,6 @@ export function* fetchDataSaga(fetchDataFn: (query: string, axios: Axios) => Pro
             });
         }
     } catch (error) {
-        // newrelic.noticeError(new Error('Error in NewRelic Saga: '));
-        console.log('****** error in search saga', error);
         yield put({ 
             type: FAILURE, 
             payload: error as Error,
