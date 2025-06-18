@@ -1,5 +1,5 @@
 
-import { GlobalAction } from "../../../../redux/actions";
+import { GlobalAction } from "../../../../store/actions";
 import { ADD_TO_CART, REMOVE_FROM_CART, globalStateWithProducts } from "../actions/productsAction";
 import { Product } from "../models/ProductModel";
 

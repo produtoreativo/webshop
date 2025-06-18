@@ -1,5 +1,4 @@
 import { applyMiddleware, Store, Observable, Reducer, Dispatch, legacy_createStore } from 'redux';
-
 import createSagaMiddleware, { Saga, SagaMiddleware, Task } from 'redux-saga';
 import { composeWithDevTools } from '@redux-devtools/extension';
 import createReducer from './Reducer';

@@ -1,7 +1,7 @@
 import { bindActionCreators, Dispatch } from 'redux';
 import { Product, ProductList } from "../models/ProductModel";
 import typeSearch, { TYPE_SEARCH } from '../reducers/typeSearch';
-import { GlobalState } from '../../../../redux/state';
+import { GlobalState } from '../../../../store/state';
 // import { GlobalState } from '@redux-webshop/state';
 import cartReducer from '../reducers/cartReducer';
 

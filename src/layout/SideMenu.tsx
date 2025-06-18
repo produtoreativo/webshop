@@ -5,7 +5,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { DarkMode } from '@mui/icons-material';
 import { useDispatch, useSelector } from "react-redux";
-import { THEME_SWITCH, darkModeSelector } from "../redux/actions";
+import { THEME_SWITCH, darkModeSelector } from "../store/actions";
 
 export default function SideMenu() {
     const dispatch = useDispatch();

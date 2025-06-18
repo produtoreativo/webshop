@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import SearchIcon from '@mui/icons-material/Search';
 import { InputAdornment, TextField } from '@mui/material';
 import { useDispatch, useSelector, useStore } from 'react-redux';
-import CustomStore from '../../redux/CustomStore';
+import CustomStore from '@webshop-store';
 import { useEffect } from 'react';
 import { productActions } from './redux/actions/productsAction';
 import { rootSaga } from './redux/sagas/rootSaga';
@@ -12,7 +12,7 @@ import { selector } from './redux/sagas/searchSaga';
 
 export default function PrimarySearchAppBar() {
   const dispatch = useDispatch();
-  const store = useStore() as CustomStore;
+  const store: CustomStore = useStore() as CustomStore;
   useEffect(function registerSaga() {
     const task = store.run(rootSaga);
     return () => {

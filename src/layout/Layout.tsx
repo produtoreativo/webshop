@@ -2,8 +2,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider, PaletteMode } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { PropsWithChildren } from 'react';
-import themes from '../themes';
-import { darkModeSelector } from '../redux/actions';
+import themes from './themes';
+import { darkModeSelector } from '../store/actions';
 
 function Layout(props: PropsWithChildren) {
   const darkMode: PaletteMode =

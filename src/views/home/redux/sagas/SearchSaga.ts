@@ -5,7 +5,7 @@ import { ProductList } from '../models/ProductModel';
 import productsReducer from '../reducers/productsReducer';
 import { FETCH_SUCCESS_PRODUCTS } from '../actions/productsAction';
 import { Axios } from 'axios';
-import { FAILURE } from '../../../../redux/actions';
+import { FAILURE } from '../../../../store/actions';
 
 export function selector(state: GlobalStateWithInput): string | undefined {
     return state.searchInputValue;

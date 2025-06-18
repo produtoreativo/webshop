@@ -28,7 +28,7 @@ export default defineConfig({
     extensions: [".web.tsx", ".web.jsx", ".web.js", ".tsx", ".ts", ".js"],
     alias: [
       // "react-native": "react-native-web",
-      { find: '@redux-webshop', replacement: './src/redux' },
+      { find: '@webshop-store', replacement: './src/store' },
     ],
   },
   plugins: [viteCommonjs(), react()],

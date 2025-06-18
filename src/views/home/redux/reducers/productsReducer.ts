@@ -1,5 +1,5 @@
 
-import { GlobalAction } from "../../../../redux/actions";
+import { GlobalAction } from "../../../../store/actions";
 import { FETCH_SUCCESS_PRODUCTS, globalStateWithProducts } from "../actions/productsAction";
 import { Product, ProductList } from "../models/ProductModel";
 import ProductService from "../models/ProductService";

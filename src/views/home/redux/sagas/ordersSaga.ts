@@ -2,7 +2,7 @@ import { takeLatest, put, select, call, getContext } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 import { CREATE_ORDER, CREATE_ORDER_SUCCESS } from '../actions/productsAction';
 import { Axios } from 'axios';
-import { GlobalState } from '../../../../redux/state';
+import { GlobalState } from '../../../../store/state';
 
 export function selector(state: GlobalState): string | undefined {
     return state.auth?.accessToken;

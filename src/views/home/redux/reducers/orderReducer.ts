@@ -1,5 +1,5 @@
 
-import { GlobalAction } from "../../../../redux/actions";
+import { GlobalAction } from "../../../../store/actions";
 import { CREATE_ORDER_SUCCESS, globalStateWithProducts } from "../actions/productsAction";
 import { Product } from "../models/ProductModel";
 
