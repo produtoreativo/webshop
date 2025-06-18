@@ -2,6 +2,29 @@
 
 Arquitetura baseada em componentes reutilizáveis, com separação clara entre UI e lógica orientada a domínio (DDD-friendly).
 
+### Tabela de tecnologias padrões
+
+| Disciplina  | Tecnologia |
+| ----------- | ----------- |
+| Component Architecture | StoryBook |
+| State Management | Redux |
+| Navigation & Routing | React Navigation (RN) ou React Router |
+| Form Handling & Validation | React Hook Form, Formik, Zod, Yup |
+| Styling | Styled Components, Emotion, Material Design MUI |
+| API Communication | Axios |
+| Authentication & Session | Firebase Auth |
+| Offline & Sync (Mobile) | WatermelonDB |
+| Animations & Gestures | React Native Reanimated, Gesture Handler |
+| Code Splitting & Optimization | React.lazy, Next.js, Metro Bundler, Hermes Engine |
+| Monorepo & Modularização | Yarn/NPM Workspaces |
+| Testing | Jest, React Testing Library, Detox |
+| CI/CD & OTA Updates | Fastlane |
+| Error Monitoring | Sentry |
+| Design System Integration | Storybook, Figma Tokens |
+| Internationalization (i18n) | i18next, FormatJS |
+| Accessibility (a11y) | React Aria, axe-core, @react-native-community/slider |
+| Performance Monitoring | Sentry, Firebase Perf |
+
 ### Estrutura padrão de diretórios
 
 ```
