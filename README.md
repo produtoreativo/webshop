@@ -7,7 +7,7 @@ Arquitetura baseada em componentes reutilizáveis, com separação clara entre U
 | Disciplina  | Tecnologia |
 | ----------- | ----------- |
 | Component Architecture | StoryBook |
-| State Management | Redux |
+| State Management | Redux, Redux Saga |
 | Navigation & Routing | React Navigation (RN) ou React Router |
 | Form Handling & Validation | React Hook Form, Formik, Zod, Yup |
 | Styling | Styled Components, Emotion, Material Design MUI |
