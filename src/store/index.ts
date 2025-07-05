@@ -5,9 +5,11 @@ import createReducer from './Reducer';
 import { Router } from '@remix-run/router';
 import { GlobalAction } from './actions';
 import { GlobalState } from './state';
-import NewRelicAgent from './newrelic';
-import { rootSaga } from './sagas/newrelic';
+// import NewRelicAgent from './newrelic';
+// import { rootSaga } from './sagas/newrelic';
+import { rootSaga } from './sagas/datadog';
 import axios from './server';
+import DataDogAgent from './datadog';
 
 interface StoreWithSagas {
     run<S extends Saga>(saga: S, ...args: Parameters<S>): Task
@@ -21,7 +23,8 @@ export default class CustomStore implements Store<GlobalState, GlobalAction>, St
         this.sagaMiddleware = createSagaMiddleware({
           context: {
             axios,
-            newRelicAgent: NewRelicAgent(),
+            datadogRum: DataDogAgent(),
+            // newRelicAgent: NewRelicAgent(),
           }
         });
         this.sagaMiddleware.setContext({ router });

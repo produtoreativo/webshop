@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 
 src/redux/newrelic/options.ts
+src/store/datadog/options.ts
