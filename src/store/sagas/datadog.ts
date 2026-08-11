@@ -29,9 +29,13 @@ export function* fetchDataSaga(action: GlobalAction): SagaIterator {
       })
       console.error('[RUM] Error reported:', action.payload)
     } else {
-      datadogRum.addAction(action.type, {
-        ...action.payload,
-      })
+
+      if (action.meta?.event === 'datadog') {
+        datadogRum.addAction(action.type, {
+          ...action.payload,
+        })
+      }
+      
     }
   } catch (err) {
     datadogRum.addError(new Error('Erro na saga de RUM'))

@@ -50,7 +50,7 @@ export default function SideMenu() {
                 </ListItem>
 
                 <ListItem key={"orders"} >
-                    <ListItemButton component={RouterLink} to="/checkout" sx={{
+                    <ListItemButton component={RouterLink} to="/group/10" sx={{
                         display: 'flex',
                         flexDirection: 'column'
                     }}>

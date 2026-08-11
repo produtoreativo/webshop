@@ -7,7 +7,7 @@ export type GlobalState = {
 
 export const initialGlobalState: GlobalState = {
     count: 12,
-    darkMode: 'dark',
+    darkMode: 'light',
     cart: {
       count: 0,
       products: {

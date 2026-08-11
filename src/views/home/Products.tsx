@@ -1,6 +1,6 @@
 
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Unstable_Grid2';
+import { GridLegacy as Grid } from '@mui/material';
 import Product from './Product';
 import { Product as ProductModel, ProductList } from './redux/models/ProductModel';
 import { productsSelector } from './redux/actions/productsAction';
