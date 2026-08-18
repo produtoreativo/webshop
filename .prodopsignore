@@ -1,0 +1,32 @@
+# .prodopsignore
+#
+# Declares areas of this repository that must not be overwritten by the
+# Framework sync mechanism (e.g. CI+PR sync from prodops-framework).
+#
+# Rule: any path listed here belongs to the product, not the Framework.
+# The Framework defines the structure (schema); the content belongs to the product.
+#
+# This file does NOT replace .gitignore.
+# Paths listed here remain versioned and visible to git.
+
+# ── Product artifacts ─────────────────────────────────────────────────────────
+prodops/artifacts/
+
+# ── Operational configuration ─────────────────────────────────────────────────
+prodops/exec/manifest.yaml
+prodops/exec/framework-lock.yaml
+prodops/exec/cards/
+
+# ── Runtime configuration ─────────────────────────────────────────────────────
+# runtime.yaml contains product-specific values (GitHub org, project number,
+# Datadog service, CloudEvents source). It must not be overwritten by sync.
+prodops/runtime/runtime.yaml
+
+# ── Product-local skills ──────────────────────────────────────────────────────
+prodops/skills/local/
+
+# ── Product-local scripts ─────────────────────────────────────────────────────
+prodops/scripts/local/
+
+# ── Product-local references ──────────────────────────────────────────────────
+prodops/skills/references/local/
