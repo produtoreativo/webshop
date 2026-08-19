@@ -7,7 +7,9 @@ export const THEME_SWITCH = '@@THEME_SWITCH';
 export const FAILURE = '@@FAILURE';
 
 export type Meta = {
-    reducer: Reducer<GlobalState, GlobalAction>;
+    reducer?: Reducer<GlobalState, GlobalAction>;
+    event?: string;
+    params?: Record<string, unknown>;
 };
 
 export interface GlobalAction extends Action {

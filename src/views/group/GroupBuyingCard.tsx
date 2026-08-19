@@ -1,6 +1,6 @@
 import {
   Box, Typography, Card, CardContent, CardMedia, Chip, Divider, LinearProgress,
-  Button, Stack, Grid, Alert
+  Button, Stack, GridLegacy as Grid, Alert
 } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -51,16 +51,16 @@ const GroupBuyingCard = () => {
             </Typography>
 
             <Grid container spacing={1}>
-              <Grid item xs={6}>
+              <Grid xs={6}>
                 <Typography fontSize={14}>📦 Mín para grupo: <strong>20 unidades</strong></Typography>
               </Grid>
-              <Grid item xs={6}>
+              <Grid xs={6}>
                 <Typography fontSize={14}>📈 Máx disponível: <strong>200 unidades</strong></Typography>
               </Grid>
-              <Grid item xs={6}>
+              <Grid xs={6}>
                 <Typography fontSize={14}>🕒 Prazo de entrega: <strong>10 dias</strong></Typography>
               </Grid>
-              <Grid item xs={6}>
+              <Grid xs={6}>
                 <Typography fontSize={14}>🚚 Frete: <strong>Calculado no checkout</strong></Typography>
               </Grid>
             </Grid>
