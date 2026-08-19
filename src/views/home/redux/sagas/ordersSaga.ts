@@ -1,48 +1,54 @@
-import { takeLatest, put, select, call, getContext } from 'redux-saga/effects';
+import { takeLatest, put, call, getContext } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 import { CREATE_ORDER, CREATE_ORDER_SUCCESS } from '../actions/productsAction';
+import { GlobalAction } from '../../../../store/actions';
+import { Product } from '../models/ProductModel';
 import { Axios } from 'axios';
-import { GlobalState } from '../../../../store/state';
+import orderReducer from '../reducers/orderReducer';
 
-export function selector(state: GlobalState): string | undefined {
-    return state.auth?.accessToken;
+interface CreateOrderAction extends GlobalAction {
+    payload: Product;
 }
 
-async function pushOrderData(data: string, axios: Axios) {
-    const response = await axios.post('/order', data);
+async function pushOrderData(productId: string, axios: Axios) {
+    const correlationId = crypto.randomUUID();
+    const response = await axios.post('/pedidos', {
+        productId,
+        customerId: 'guest',
+        correlationId,
+    });
     return response;
 }
 
-export function* pushOrderDataSaga(pushOrderDataFn, action): SagaIterator {
+export function* pushOrderDataSaga(
+    pushOrderDataFn: (productId: string, axios: Axios) => Promise<unknown>,
+    action: CreateOrderAction
+): SagaIterator {
     try {
         const axios: Axios = (yield getContext('axios')) as Axios;
-        const token = (yield select(selector)) as string | undefined;
-        const data = { token, sku: action.payload.sku };
-        const order = yield call(pushOrderDataFn, data, axios);
+        const order: { data: { pedidoId: string } } = (yield call(pushOrderDataFn, action.payload.id, axios)) as { data: { pedidoId: string } };
         yield put({
-          type: CREATE_ORDER_SUCCESS,
-          payload: {
-            order: order.data,
-          }
+            type: CREATE_ORDER_SUCCESS,
+            payload: {
+                pedidoId: order.data.pedidoId,
+            },
+            meta: {
+                reducer: orderReducer,
+            },
         });
-        
-        //PEGAR O TOKEN E SKU
-        // const searchInputValue = (yield select(selector)) as string | undefined;
-        // const inputValue = searchInputValue || ''; // Default to empty string if undefined
-        // if (inputValue.length >= 4) {
-        //     const products: ProductList = (yield call(fetchDataFn, inputValue, axios)) as ProductList;
-        //     yield put({ 
-        //         type: FETCH_SUCCESS_PRODUCTS, 
-        //         payload: {
-        //             data: products.data,
-        //         },
-        //         meta: {
-        //             reducer: productsReducer
-        //         }
-        //     });
-        // }
-    } catch (error) {
-        console.log('****** error', error)
+    } catch (error: unknown) {
+        const axiosError = error as { response?: { status?: number } };
+        if (axiosError?.response?.status === 503) {
+            yield put({
+                type: '@@FAILURE',
+                payload: { message: 'Serviço temporariamente indisponível. Tente novamente em instantes.' },
+            });
+        } else {
+            yield put({
+                type: '@@FAILURE',
+                payload: { message: 'Erro ao criar pedido. Tente novamente.' },
+            });
+        }
     }
 }
 

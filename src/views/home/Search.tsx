@@ -8,13 +8,15 @@ import CustomStore from '@webshop-store';
 import { useEffect } from 'react';
 import { productActions } from './redux/actions/productsAction';
 import { rootSaga } from './redux/sagas/rootSaga';
-import { selector } from './redux/sagas/searchSaga';
+import { selector } from './redux/sagas/SearchSaga';
+import { FETCH_PRODUCTS_ON_LOAD } from './redux/actions/catalogoAction';
 
 export default function PrimarySearchAppBar() {
   const dispatch = useDispatch();
   const store: CustomStore = useStore() as CustomStore;
   useEffect(function registerSaga() {
     const task = store.run(rootSaga);
+    store.dispatch({ type: FETCH_PRODUCTS_ON_LOAD });
     return () => {
       if (task) {
         task.cancel();

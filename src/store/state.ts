@@ -3,6 +3,10 @@ export type GlobalState = {
     darkMode: string,
     cart: ShopCart.Cart,
     auth: ShopUser.Auth,
+    order?: {
+        isLoading: boolean;
+        currentOrderId?: string;
+    },
 }
 
 export const initialGlobalState: GlobalState = {
