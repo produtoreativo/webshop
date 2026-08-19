@@ -1,7 +1,7 @@
 schema_version: 1
 
 prodops_framework:
-  version: "v1.11.1"
+  version: "v1.14.0"
   status: consumer
   external_source: https://github.com/produtoreativo/prodops-framework
   synchronization_mechanism: ci-pr-sync
@@ -11,9 +11,9 @@ distribution:
 
 drift:
   status: ok
-  installed_version: "v1.11.1"
-  available_version: "v1.11.1"
-  last_checked: "2026-08-18"
+  installed_version: "v1.14.0"
+  available_version: "v1.14.0"
+  last_checked: "2026-08-19"
   reason: >
     Versão instalada igual à versão disponível — sem drift.
     Re-checar após nova release publicada em prodops-framework.
