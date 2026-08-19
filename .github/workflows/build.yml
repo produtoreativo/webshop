@@ -1,0 +1,17 @@
+name: Build
+
+on:
+  workflow_dispatch: # manual ou push se quiser
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call Validate Workflow
+        uses: ./.github/workflows/validate.yml
+        with:
+          run-tests: true
+
+      - name: Build Project
+        run: npm run build
