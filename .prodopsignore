@@ -30,3 +30,10 @@ prodops/scripts/local/
 
 # ── Product-local references ──────────────────────────────────────────────────
 prodops/skills/references/local/
+
+# ── Product README ────────────────────────────────────────────────────────────
+# README.md and README.en.md contain product-specific documentation.
+# The Framework README uses links to framework-internal paths that do not
+# exist in consumer repos. Protect both from future framework syncs.
+README.md
+README.en.md
